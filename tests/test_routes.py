@@ -107,6 +107,16 @@ class TestAccountService(TestCase):
         self.assertEqual(new_account["address"], account.address)
         self.assertEqual(new_account["phone_number"], account.phone_number)
         self.assertEqual(new_account["date_joined"], str(account.date_joined))
+    
+    def test_list_accounts(self):
+        """ it should list all accounts"""
+        account=self._create_accounts(5)
+        resp=self.client.get(
+            BASE_URL,content_type="application/json"
+        )
+        self.assertEqual(resp.status_code,status.HTTP_200_OK)
+        data=resp.get_json()
+        self.assertEqual(len(data),5)
 
     def test_bad_request(self):
         """It should not Create an Account when sending the wrong data"""
