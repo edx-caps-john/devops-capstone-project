@@ -112,7 +112,7 @@ class TestAccountService(TestCase):
     
     def test_list_accounts(self):
         """ it should list all accounts"""
-        account=self._create_accounts(5)
+        self._create_accounts(5)
         resp=self.client.get(
             BASE_URL,content_type="application/json"
         )
